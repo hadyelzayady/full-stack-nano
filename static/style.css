@@ -3,18 +3,36 @@ h1, h2, h3, h4       { color: #FFFFFF; }
 h1, h2          { font-family: 'Georgia', serif; margin: 0; }
 h1              { border-bottom: 2px solid #eee; }
 h2              { font-size: 1.2em; }
-
+table,td,th {border:1px solid #C3D4DA;border-collapse: collapse;}
+table{width:80%;margin-left: 10%;margin-right: 10%;margin-bottom: 20px}
+.main-header {font-size: 25px ;color: #89DA90;}
+.col1 ,.col2,.col3{font-size: 20px ;color:#B05CC6;}
+.col1{width: 20%}
+.col3{width:8%;}
+.options { width:15%;color:#8772A4;}
+td {color:#FCF5FE;padding:10px}
 p, dd, dt               { color: #CCCCCC;}
 button {margin-right: 5px;}
 a {text-decoration: none; color:#FFFFCC; font-size: .75em;}
-.pane {position:absolute;right:25%; left:25%; border: 2px solid;
+.pane {position:absolute;right:10%; left:10%; border: 2px solid;
     border-radius: 25px; padding: 5px; margin: 5px; border-color: #999999; background-color: #333333 }
 .header         {left:50%; text-align: center;}
 .name {width:50%;display: inline-block; float: left;}
-.restaurant-options {margin-right:50%;}
-.description {}
-.price {text-align: right; width:50%; float: right; }
-.editdeletepane{}
+a.name{font-size: 20px;margin: 10px;margin-left: 0px}
+.restaurant-options {margin-right:50%;margin-bottom: 10px}
+.restaurant{border-bottom: 2px solid #eee;}
+.restaurant .name{font-size: 20px;}
 
+.description {}
+.editdeletepane{}
+a.add-restaurant{    display: block;
+    width: 115px;
+    height: 25px;
+    background: #E4C2F0;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: #5F007E;
+    font-weight: bold;}
 .flash          { background: #cee5F5; }
 

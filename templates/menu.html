@@ -22,23 +22,29 @@
         {% endif %}
     {% endwith %}
     </div>
-		{% for i in items %}
-    <div class = 'nameAndPrice'>
-		<span class = 'name'><p>{{i.name}}</p></span>
-		<span class = 'price'>
-		<p>{{i.price}} </p>
-	</span>
-	</div>
-	<div class = 'description'>
-		<p>{{i.description}}</p>
-		<p>course: {{i.course}}</p>
-	</div>
-	<div class = "editdeletepane">
-	<a href="{{url_for('editMenuItem',restaurant_id = restaurant.id, menu_id=i.id)}}" >Edit</a>
-	<a href="{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id=i.id)}}" >
-	Delete</a>
-	</div>
-		{% endfor %}
+    <div calss="tables">
+    {%for header in tableheaders%}
+    	<table>
+    		<caption class="main-header">{{header}}</caption>
+    		<th class="col1">name</th>
+    		<th class="col2">description</th>
+    		<th class="col3">price</th>
+    		<th class="options">options</th> 
+    		{% for item in items %}
+    		{% if item.course==header %}
+    		<tr>
+    			<td>{{item.name}}</td>
+    			<td>{{item.description}}</td>
+    			<td>{{item.price}}</td>
+    			<td><button onclick="location.href='{{url_for('editMenuItem',restaurant_id=restaurant.id,menu_id=item.id)}}'">Edit</button><button color='red' onclick="location.href='{{url_for('deleteMenuItem',restaurant_id=restaurant.id,menu_id=item.id)}}'"><font color="red">Delete</font></button></td>
+    		</tr>
+    		{% endif %}
+    		{% endfor %}
+    	</table>
+    	<p></p>
+    {%endfor %}  	
+    </div>
+
 </div>
 </body>
 </html>
