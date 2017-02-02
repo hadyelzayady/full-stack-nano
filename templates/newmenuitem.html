@@ -1,0 +1,50 @@
+<html>
+<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	</head>
+<body>
+<h1>{{restaurant.name}}</h1>
+<h2>New Menu Item</h2>
+    <div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          
+        <ul>
+        {% for message in messages %}
+            <li> <strong style="color:red;"> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+    </div>
+
+<div class = 'pane'>
+<form action="{{ url_for('newMenuItem', restaurant_id=restaurant.id )}}" method = 'POST'>
+<dl>
+	<dt>Name:</dt>
+		<dd><input type ='text' size='30' name='name' autofocus required></dd>
+	<dt>Description:</dt>
+		<dd><textarea name = 'description' rows='5' cols='40'></textarea></dd>
+	<dt>Price:</dt>
+		<dd><input type = 'number' size = '8' name='price'  placeholder = '$0' min="0" step="any" required>$</dd>
+	<dt>Course:</dt>
+		<dd><input type ='radio' name='course' value='Appetizer' checked >Appetizer</dd>
+		<dd><input type ='radio' name='course' value='Entree'>Entree</dd>
+		<dd><input type ='radio' name='course' value='Dessert'>Dessert</dd>
+		<dd><input type ='radio' name='course' value='Beverage'>Beverage</dd>
+
+</dl>
+
+
+<input type='submit' value='Create'>
+
+</form>
+</div>
+
+</body>
+
+
+
+
+</html>

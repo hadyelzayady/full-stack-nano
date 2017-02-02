@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>new restaurant</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
+</head>
+<body>
+<form method="POST" action="{{url_for('newRestaurant')}}">
+	<input type="text" placeholder="restaurant name" name="name" required="true">
+	<input type="submit" value="add">
+</form>
+</body>
+</html>
