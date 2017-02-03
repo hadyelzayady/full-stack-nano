@@ -9,7 +9,7 @@ table{width:80%;margin-left: 10%;margin-right: 10%;margin-bottom: 20px}
 .col1 ,.col2,.col3{font-size: 20px ;color:#B05CC6;}
 .col1{width: 20%}
 .col3{width:8%;}
-.options { width:15%;color:#8772A4;}
+.options { width:130px;color:#8772A4;}
 td {color:#FCF5FE;padding:10px}
 p, dd, dt               { color: #CCCCCC;}
 button {margin-right: 5px;}
@@ -19,15 +19,15 @@ a {text-decoration: none; color:#FFFFCC; font-size: .75em;}
 .header         {left:50%; text-align: center;}
 .name {width:50%;display: inline-block; float: left;}
 a.name{font-size: 20px;margin: 10px;margin-left: 0px}
-.restaurant-options {margin-right:50%;margin-bottom: 10px}
+.restaurant-options {margin-right:50%;margin-bottom: 10px	}
 .restaurant{border-bottom: 2px solid #eee;}
 .restaurant .name{font-size: 20px;}
 
 .description {}
 .editdeletepane{}
 a.add-restaurant{    display: block;
-    width: 115px;
-    height: 25px;
+    width: 150px;
+    height: 20px;
     background: #E4C2F0;
     padding: 10px;
     text-align: center;

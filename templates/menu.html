@@ -5,6 +5,7 @@
 <body>
 <div class = 'pane'>
 		<div class = 'header'>
+		<a href="{{url_for('restaurants')}}">My Restaurants</a>
 		<h1>{{ restaurant.name }}</h1>
 	    </div>
     {% if items.first() == None %}
