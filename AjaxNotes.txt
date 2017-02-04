@@ -1,0 +1,5 @@
+sync request(without ajax):
+	SEND  request and wait for response 
+
+async (ajax);
+	SEND request (make a list of what I will do with respnse) and make other tasks untill respnse

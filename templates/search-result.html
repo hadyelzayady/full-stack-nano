@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>search result</title>
+</head>
+<body>
+	{% if items.first()==None %}
+	<h1>No items found</h1>
+	<a href="{{url_for('restaurants')}}"></a>
+	{% else %}
+	{% for item in items %}
+	<a href="#">{{item.name}}</a>
+	<br>
+	{% endfor %}
+	{% endif %}
+</body>
+</html>

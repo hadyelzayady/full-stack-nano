@@ -10,7 +10,13 @@
 </head>
 <body>
 	<div class="pane">
-		<h1 class="header">My Restaurants</h1>
+		<div class="restaurant-header">
+			<h1 class="header">My Restaurants</h1>
+			<form action="{{url_for('searchItem')}}" method="POST">
+				<input type="text" name="search" placeholder="search for">
+				<input type="submit" name="search">
+			</form>
+		</div>
 		<a class="add-restaurant" href="{{url_for('newRestaurant')}}">add restaurant</a>
 		 <div class = 'flash'>
 		      {% with messages = get_flashed_messages() %}

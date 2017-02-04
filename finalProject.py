@@ -4,11 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash,json
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
-#####import restaruants
 
-
-
-####
 app = Flask(__name__)
 
 engine = create_engine('sqlite:///restaurantmenu.db')
@@ -160,6 +156,12 @@ def deleteMenuItem(restaurant_id, menu_id):
         return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
     else:
         return render_template('deletemenuitem.html',restaurant_id=restaurant_id, item=itemToDelete)
+
+@app.route('/restaurants/search-item',methods=['POST'])
+def searchItem():
+    searchfor=request.form['search']
+    items=session.query(MenuItem).filter_by(name=searchfor)
+    return render_template('search-result.html',items=items)
 
 #Json requests
 @app.route('/restaurants/JSON')
