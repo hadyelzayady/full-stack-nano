@@ -1,0 +1,36 @@
+1-*jqery source is downloaded before loading page but usually it exists locally on pc if he visited website that uses jquery so it exists on cache which save time of downloading it agian
+*jquery does not execute untill document is ready (fully loaded).
+
+
+*js is executed as soon as it is dowloaded so -> case 1: src of js i  header so it will be downloaded before document loaded and hence execute on no DOM (document not loaded yet) ,to solve this problem we should load it last thing to ensure that every thing have beed loaded so we put js src last thing in the body BUT-> ** js src will be downloaded last thing which will make page loading slow and there will be a time gab between after page loaded and executing the script (download time)
+
+
+***case 2:
+	download js firstly like jquey (js src in the head) but execting it after the document is ready like jquery by execting js functions as jquey function like this:
+
+function someFunction() {
+    // Do interesting things
+}
+
+$(someFunction)
+or
+
+$(function(){
+    // Do interesting things
+})
+
+2- EVENT Delegation:
+case 1:
+run this:$( 'article' ).on( 'click', function() {
+    $( 'body' ).addClass( 'selected' );   
+});
+
+then this:$( 'body' ).append( '<article> <h1>Appended Article</h1> <p>Content for the new article </p> </article>' );
+
+first command makes any array of current article tags that he will listen to BUT that means the appended article will not be in the list as we added it later so we have to use delegation like in case 2
+
+
+case 2:
+	$( '.container' ).on( 'click', 'article', function() { … });
+container class is the parent of article tags so the even will listen to elements in container and on click it will check if the clicked element is article tag
+
