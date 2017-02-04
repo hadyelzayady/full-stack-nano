@@ -1,0 +1,7 @@
+sort:
+    session.query(class).order_by(class.property.desc())
+
+Time:
+    import datetime
+    datetime.date.today()
+    datetime.timedelta(days=value)
