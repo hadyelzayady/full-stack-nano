@@ -1,8 +1,14 @@
+from __future__ import print_function # In python 2.7
+import sys
 from flask import Flask, render_template, request, redirect, url_for, flash,jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
+#####import restaruants
 
+
+
+####
 app = Flask(__name__)
 
 engine = create_engine('sqlite:///restaurantmenu.db')
@@ -34,7 +40,14 @@ def editRestaurant(restaurant_id):
     else:# get request
         restaurant=session.query(Restaurant).filter_by(id=restaurant_id).one()
         return render_template('editRestaurant.html',restaurant=session.query(Restaurant).filter_by(id=restaurant_id).one())
-        
+  
+def deleteRestaurantItems(restaurant_id):
+    items=session.query(MenuItem).filter_by(restaurant_id=restaurant_id)
+    for item in items:
+        session.delete(item)
+    session.commit()
+    return   
+
 @app.route('/restaurants/<int:restaurant_id>/delete',methods=['GET','POST'])
 def deleteRestaurant(restaurant_id):
     restaurant=session.query(Restaurant).filter_by(id=restaurant_id).first()
@@ -42,6 +55,9 @@ def deleteRestaurant(restaurant_id):
         restaurant=session.query(Restaurant).filter_by(id=restaurant_id).first()
         flash('%s deleted' % restaurant.name)
         session.delete(restaurant)
+        #delete restaurant items
+        deleteRestaurantItems(restaruant.id)            
+        #
         session.commit()
         return redirect(url_for('restaurants'))
     else :#get request
@@ -49,6 +65,24 @@ def deleteRestaurant(restaurant_id):
             flash('not exist')
             return redirect(url_for('restaurants'))
         return render_template('deleteRestaurant.html',restaurant=restaurant)
+
+@app.route('/restaurants/multiple-delete',methods=['POST'])
+def deleteMultipleRestaurants():
+    restaurants=request.form.getlist('restaurant_id')
+    for restaurant_id in restaurants:
+        session.delete(session.query(Restaurant).filter_by(id=restaurant_id).one())
+        deleteRestaurantItems(restaurant_id)
+    session.commit()
+    return redirect(url_for('restaurants'))
+
+@app.route('/restaurants/delete-All',methods=['POST'])
+def deleteAllRestaurants():
+    restaurants=session.query(Restaurant).all()
+    for restaurant in restaurants:
+        session.delete(restaurant)
+        deleteRestaurantItems(restaurant_id=restaurant.id)
+    session.commit()
+    return redirect(url_for('restaurants'))
 
 @app.route('/restaurants/new',methods=['POST','GET'])
 def newRestaurant():
@@ -149,4 +183,4 @@ def restaurantmenuJson(restaurant_id):
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
     app.debug = True
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8080)
