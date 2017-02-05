@@ -8,8 +8,8 @@
 	<h1>No items found</h1>
 	<a href="{{url_for('restaurants')}}"></a>
 	{% else %}
-	{% for item in items %}
-	<a href="#">{{item.name}}</a>
+	{% for i in range(size) %}
+	<p><a href="{{url_for('restaurantMenu',restaurant_id=restaurants[i].id, hilightFlag=items[i].name)}}">{{items[i].name}}</a> in {{restaurants[i].name}}</p>
 	<br>
 	{% endfor %}
 	{% endif %}

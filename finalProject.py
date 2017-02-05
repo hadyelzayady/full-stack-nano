@@ -99,12 +99,13 @@ def newRestaurant():
 
 tableheaders=['Appetizer','Entree','Dessert','Beverage']
 @app.route('/restaurants/<int:restaurant_id>/')
-@app.route('/restaurants/<int:restaurant_id>/menu')
-def restaurantMenu(restaurant_id):
+@app.route('/restaurants/<int:restaurant_id>/menu/<string:hilightFlag>')
+@app.route('/restaurants/<int:restaurant_id>/menu/')
+def restaurantMenu(restaurant_id,hilightFlag="None"):
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     items = session.query(MenuItem).filter_by(restaurant_id=restaurant_id)
     return render_template(
-        'menu.html', restaurant=restaurant, items=items, restaurant_id=restaurant_id,tableheaders=tableheaders)
+        'menu.html',hilightFlag=hilightFlag ,restaurant=restaurant, items=items, restaurant_id=restaurant_id,tableheaders=tableheaders)
 
 
 @app.route('/restaurants/<int:restaurant_id>/new', methods=['GET', 'POST'])
@@ -161,7 +162,10 @@ def deleteMenuItem(restaurant_id, menu_id):
 def searchItem():
     searchfor=request.form['search']
     items=session.query(MenuItem).filter_by(name=searchfor)
-    return render_template('search-result.html',items=items)
+    restaurants=[]
+    for i in items:
+        restaurants.append(session.query(Restaurant).filter_by(id=i.restaurant_id).one())
+    return render_template('search-result.html',items=items,restaurants=restaurants,size=len(restaurants))
 
 #Json requests
 @app.route('/restaurants/JSON')

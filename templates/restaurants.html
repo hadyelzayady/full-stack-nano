@@ -36,7 +36,7 @@
 		<button type="submit" formaction="{{url_for('deleteAllRestaurants')}}">delete All restaurants</button>
 		{% for restaurant in restaurants %}
 		<div class="restaurant">
-			<input type="checkbox" name="restaurant_id" value="{{restaurant.id}}" ></input><a class="name" href="{{url_for('restaurantMenu',restaurant_id=restaurant.id)}}">{{restaurant.name}}</a><br>	
+			<input type="checkbox" name="restaurant_id" value="{{restaurant.id}}" ></input><a class="name" href="{{url_for('restaurantMenu',restaurant_id=restaurant.id,hilightFlag='')}}">{{restaurant.name}}</a><br>	
 			<div class="restaurant-options">
 				<button onclick="location.href='{{url_for('editRestaurant',restaurant_id=restaurant.id)}}'">Edit</button>
 				<button onclick="location.href='{{url_for('deleteRestaurant',restaurant_id=restaurant.id)}}'">Delete</button>

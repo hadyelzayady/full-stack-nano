@@ -5,6 +5,7 @@
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
+  <script type="text/javascript" src="{{url_for('static',filename='app.js')}}"></script>
 	</head>
 <body>
 <div class = 'pane'>
@@ -34,20 +35,23 @@
     		<th class="col1">name</th>
     		<th class="col2">description</th>
     		<th class="col3">price</th>
-    		<th class="options">options</th> 
+    		<th class="options">options</th>
     		{% for item in items %}
-    		{% if item.course==header %}
-    		<tr>
-    			<td>{{item.name}}</td>
-    			<td>{{item.description}}</td>
-    			<td>{{item.price}}</td>
-    			<td><button onclick="location.href='{{url_for('editMenuItem',restaurant_id=restaurant.id,menu_id=item.id)}}'">Edit</button><button color='red' onclick="location.href='{{url_for('deleteMenuItem',restaurant_id=restaurant.id,menu_id=item.id)}}'"><font color="red">Delete</font></button></td>
-    		</tr>
-    		{% endif %}
-    		{% endfor %}
-    	</table>
-    	<p></p>
-    {%endfor %}  	
+            {% if item.course==header %}
+            {% if item.name==hilightFlag %}
+            <tr id="hilight">
+            {% else %}
+            <tr>
+            {% endif %}
+                <td>{{item.name}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.price}}</td>
+                <td><button onclick="location.href='{{url_for('editMenuItem',restaurant_id=restaurant.id,menu_id=item.id)}}'">Edit</button><button color='red' onclick="location.href='{{url_for('deleteMenuItem',restaurant_id=restaurant.id,menu_id=item.id)}}'"><font color="red">Delete</font></button></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    {%endfor %}     
     </div>
 
 </div>
