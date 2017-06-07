@@ -52,7 +52,7 @@ def deleteRestaurant(restaurant_id):
         flash('%s deleted' % restaurant.name)
         session.delete(restaurant)
         #delete restaurant items
-        deleteRestaurantItems(restaruant.id)            
+        deleteRestaurantItems(restaurant.id)            
         #
         session.commit()
         return redirect(url_for('restaurants'))
@@ -161,7 +161,8 @@ def deleteMenuItem(restaurant_id, menu_id):
 @app.route('/restaurants/search-item',methods=['POST'])
 def searchItem():
     searchfor=request.form['search']
-    items=session.query(MenuItem).filter_by(name=searchfor)
+    searchfor="%"+searchfor+"%"
+    items=session.query(MenuItem).filter(MenuItem.name.like(searchfor))
     restaurants=[]
     for i in items:
         restaurants.append(session.query(Restaurant).filter_by(id=i.restaurant_id).one())
