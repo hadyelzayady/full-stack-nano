@@ -7,10 +7,14 @@
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="510564801497-jfn38be8me88d2hhohvkqk5rju08681h.apps.googleusercontent.com">
+
 </head>
 <body>
 	<div class="pane">
 		<div class="restaurant-header">
+		<div class="g-signin2" data-onsuccess="onSignIn"></div>
 			<h1 class="header">My Restaurants</h1>
 			<form action="{{url_for('searchItem')}}" method="POST">
 				<input type="text" name="search" placeholder="search for">
@@ -47,5 +51,29 @@
 		</div>
 		{% endfor %}
 	</div>
+	<script>
+		function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  $('.g-signin2').after('<a href="#" onclick="signOut();" class="signOut">Sign out</a>');
+  $('.g-signin2').after('<h> <font color="red">'+profile.getName()+'</font></h>');
+  $('.g-signin2').remove();
+
+	}
+//	function addsignout(){//
+
+//	}
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+     $('.signOut').after('<div class="g-signin2" data-onsuccess="onSignIn"></div>');
+    $('.signOut').remove();
+	}
+	</script>
 </body>
 </html>
